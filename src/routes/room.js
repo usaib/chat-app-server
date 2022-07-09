@@ -11,5 +11,7 @@ const router = express.Router();
 
 router.post("/getAllRooms", RoomController.allRooms);
 router.post("/create", RoomController.create);
+router.post("/createRoomChat", RoomController.createRoomChat);
+router.post("/getRoomChat", RoomController.getRoomChat);
 
 module.exports = router;

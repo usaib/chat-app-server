@@ -6,7 +6,6 @@ import User from "./src/routes/user";
 import Auth from "./src/routes/auth";
 import Room from "./src/routes/room";
 
-
 dotenv.config();
 require("./src/config/sequelize");
 const app = express();
@@ -21,6 +20,5 @@ app.use(bodyParser.json());
 app.use("/user", User);
 app.use("/auth", Auth);
 app.use("/room", Room);
-
 
 module.exports = app;

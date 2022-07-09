@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { rooms } from "../models";
 import { user_rooms } from "../models";
+import { room_chats } from "../models";
 import { users } from "../models";
 
 export const getAllRooms = async (params) => {
@@ -14,6 +15,25 @@ export const getAllRooms = async (params) => {
 					model: rooms
 				}
 			]
+		});
+		return {
+			success: true,
+			data: data
+		};
+	} catch (error) {
+		console.log(error);
+		return {
+			success: false,
+			data: error
+		};
+	}
+};
+export const getRoomChat = async (params) => {
+	try {
+		const data = await room_chats.findAndCountAll({
+			where: {
+				room: params.roomId
+			}
 		});
 		return {
 			success: true,
@@ -69,6 +89,23 @@ export const create = async (params) => {
 		};
 	} catch (error) {
 		console.log(error);
+		return {
+			success: false,
+			data: error
+		};
+	}
+};
+export const createRoomChat = async (params) => {
+	try {
+		const chat = await room_chats.create({
+			...params
+		});
+
+		return {
+			success: true,
+			data: chat.id
+		};
+	} catch (error) {
 		return {
 			success: false,
 			data: error

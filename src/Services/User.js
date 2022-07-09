@@ -44,6 +44,7 @@ export const getProfile = async (params) => {
 };
 
 export const create = async (params) => {
+	console.log("in service", params);
 	try {
 		const reqPass = crypto
 			.createHash("md5")
@@ -51,9 +52,7 @@ export const create = async (params) => {
 			.digest("hex");
 		params.password = reqPass;
 		const Users = await users.create({
-			...params,
-			isVerified: false,
-			verifyToken: uniqueId()
+			...params
 		});
 
 		return {
@@ -61,6 +60,7 @@ export const create = async (params) => {
 			data: Users.id
 		};
 	} catch (error) {
+		console.log(error);
 		return {
 			success: false,
 			data: error

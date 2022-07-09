@@ -1,4 +1,4 @@
-import { user } from "../../models";
+import { users } from "../../models";
 const Service = require("../../Services/User");
 import { errorResponse, successResponse } from "../../helpers";
 
@@ -16,13 +16,14 @@ export const allUsers = async (request, response) => {
 };
 
 export const create = async (request, response) => {
+	console.log(request.body);
 	try {
 		const { email } = request.body;
 
-		const users = await user.findOne({
+		const user = await users.findOne({
 			where: { email }
 		});
-		if (users) {
+		if (user) {
 			return successResponse(
 				response,
 				"User Already Exists.",
